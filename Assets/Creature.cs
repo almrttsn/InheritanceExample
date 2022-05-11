@@ -5,22 +5,22 @@ using UnityEngine;
 
 public abstract class Creature : MonoBehaviour
 {
-    public int _speedOfRace;
+    public int _speedOfRace; //dışarıdan her ırk için ayrı ayrı verilecek değer
 
     public void Start()
     {
-        WelcomeSpeech();    //virtual türündeki fonksiyonum
-        MotivationSpeech(); //abstract türündeki fonksiyonum
+        WelcomeSpeech();    //virtual türündeki fonksiyonum 1 kere çalışsın
+        MotivationSpeech(); //abstract türündeki fonksiyonum 1 kere çalışsın
     }
 
     public void Update()
     {
-        ForwardMarch();     //virtual türündeki fonksiyonum
+        ForwardMarch();     //virtual türündeki fonksiyonum sürekli çalışsın yürütsün
     }
 
     public virtual void WelcomeSpeech()
     {
-        Debug.Log("Welcome to the Middle Earth");
+        Debug.Log("Creature: Welcome to the Middle Earth");
     }
     public abstract void MotivationSpeech();
 
