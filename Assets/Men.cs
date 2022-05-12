@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Men : Creature                 //creature'den inherit
 {
+    protected bool _wasGondorThereWhenTheWestfoldFell;  //Men görsün bunu sadece istiyoruz
+
     public override void WelcomeSpeech()    //men base welcome kullansın (yazmasam da olurdu)
     {
         base.WelcomeSpeech();
