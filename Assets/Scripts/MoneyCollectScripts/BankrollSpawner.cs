@@ -10,12 +10,9 @@ public class BankrollSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Wallet += 100;
-        }
         _bankrollCount = Wallet / 20;
         SpawnBankroll();
+        Wallet++;
     }
 
     private void SpawnBankroll()
@@ -26,11 +23,6 @@ public class BankrollSpawner : MonoBehaviour
                 _bankrolls[i].SetActive(true);
             }
         }
-    }
-
-    private IEnumerator SpawnDelayer()
-    {
-        yield return new WaitForSeconds(1f);
     }
 
 }
