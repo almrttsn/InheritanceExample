@@ -6,12 +6,12 @@ public class Elf : Creature                     //creature'den inherit
 {
     public override void WelcomeSpeech()        //elfler farklı welcome desinler
     {
-        Debug.Log("Elves: Welcome to Eriador");
+        //Debug.Log("Elves: Welcome to Eriador");
     }
 
     public override void MotivationSpeech()     //elf abstract motivasyonu
     {
-        Debug.Log("Elves: Tangado haid! Leithio i philinn!");
+        //Debug.Log("Elves: Tangado haid! Leithio i philinn!");
     }
 
     public override void ForwardMarch()         //base virtual march'ı

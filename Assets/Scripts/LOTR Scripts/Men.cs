@@ -12,7 +12,7 @@ public class Men : Creature                 //creature'den inherit
     }
     public override void MotivationSpeech() //men abstract motivasyonu
     {
-        Debug.Log("Men: Sons of Gondor, Sons of Rohan, Hold your ground!");
+        //Debug.Log("Men: Sons of Gondor, Sons of Rohan, Hold your ground!");
     }
 
 }

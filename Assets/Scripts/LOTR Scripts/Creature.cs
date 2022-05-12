@@ -20,7 +20,7 @@ public abstract class Creature : MonoBehaviour
 
     public virtual void WelcomeSpeech()
     {
-        Debug.Log("Creature: Welcome to the Middle Earth");
+        //Debug.Log("Creature: Welcome to the Middle Earth");
     }
     public abstract void MotivationSpeech();
 
