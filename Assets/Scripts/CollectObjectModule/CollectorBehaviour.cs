@@ -15,72 +15,66 @@ public enum ObjectType
 
 public class CollectorBehaviour : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _objectSlots;
+    [SerializeField] private List<Transform> _objectSlots;  //Objelerin tutulmasını istediğimiz slot listesi
 
 
     [SerializeField] private CollectObject _spherePrefab;
     [SerializeField] private CollectObject _capsulePrefab;
 
-    [SerializeField] private JoystickBehaviour _joystickBehaviour;
+    [SerializeField] private JoystickBehaviour _joystickBehaviour;  //Joystick behaviour özellikli
+                                                                    //joystick'i buraya attık
+    [SerializeField] private float _joystickSensivity;
 
-    private List<CollectObject> _listOfObjectTypes;
+    private List<CollectObject> _listOfObjectTypes; //Obje tiplerinı ayırma listesi
 
-    private float _joystickXInput;
+    private float _joystickXInput;  
     private float _joystickZInput;
 
-    private GameObject _collectedCapsules;
-    private GameObject _collectedSpheres;
-
-    private Vector3 _firstPossibleSpot;
-    private int _counter;
-
-    //public AreaType AreaType;
-    //public ObjectType ObjectType;
+    private int _counter;   //Tutulan dolu slot sayısı
 
     private void Start()
     {
-        _listOfObjectTypes = new List<CollectObject>();
+        _listOfObjectTypes = new List<CollectObject>(); //Listeye element kaydı için gerekli
     }
 
     private void Update()
     {
-        _joystickXInput = _joystickBehaviour.GetHorizontalInput();
-        _joystickZInput = _joystickBehaviour.GetVerticalInput();
-        transform.position += new Vector3(_joystickXInput, 0, _joystickZInput) * 0.1f;
+        _joystickXInput = _joystickBehaviour.GetHorizontalInput();  //Joystickten gelen Horizontal değer
+        _joystickZInput = _joystickBehaviour.GetVerticalInput();    //Joystickten gelen Vertical değer
+        transform.position += new Vector3(_joystickXInput, 0, _joystickZInput) * _joystickSensivity;
+        //Player'ın hareketini joystickten gelen verilere bağladık
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SphereCollectArea")
+        if (other.tag == "SphereCollectArea" && _counter < _objectSlots.Count)  //Boş slot var ise
         {
-            Debug.Log("You logged in Sphere Collect Area");
-            var sphere = Instantiate(_spherePrefab);
-            _listOfObjectTypes.Add(sphere);
-            FillSlot(sphere);
+            var sphere = Instantiate(_spherePrefab);    //Yarat
+            _listOfObjectTypes.Add(sphere);             //Listeye ekle
+            FillSlot(sphere);                           //Slot transformuna yerleştir
         }
-        else if (other.tag == "CapsuleCollectArea")
+        else if (other.tag == "CapsuleCollectArea" && _counter < _objectSlots.Count)    //Boş slot var ise
         {
-            Debug.Log("You logged in Capsule Collect Area");
-            var capsule = Instantiate(_capsulePrefab);
-            _listOfObjectTypes.Add(capsule);
-            FillSlot(capsule);
+            var capsule = Instantiate(_capsulePrefab);  //Yarat
+            _listOfObjectTypes.Add(capsule);            //Listeye ekle
+            FillSlot(capsule);                          //Slot transformuna yerleştir
         }
         else if (other.tag == "MarketArea")
-        {
-            Debug.Log("You logged in Market Area");
+        {       //Market area scriptine sahip objelerde ayırdığımız iki obje türünden == Sphere ise
             if (other.gameObject.GetComponent<MarketArea>().DesiredObjectType == ObjectType.Sphere)
             {
-                foreach (var item in _listOfObjectTypes)
+                foreach (var item in _listOfObjectTypes) //Yaratıp içine obje attığımız listedeki,
                 {
-                    if(item.TypeOfObjects == ObjectType.Sphere)
+                    if(item.TypeOfObjects == ObjectType.Sphere) //Collect içinden Sphere ise,
                     {
-                        _listOfObjectTypes.Remove(item);
-                        Destroy(item.gameObject);
-                        _counter--;
-                    }                    
+                        _listOfObjectTypes.Remove(item);    //Bu itemi listeden sil,
+                        Destroy(item.gameObject);   //Bu itemi yok et,
+                        _counter--; //Ve 1 tane slotu uygun hale getir
+
+                    }
                 }
             }
-            else
+            else     //ObjectType.Capsule
             {
                 foreach (var item in _listOfObjectTypes)
                 {

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MarketArea : MonoBehaviour
 {
-    public ObjectType DesiredObjectType;
+    public ObjectType DesiredObjectType;    //Hangi marketin hangi objeyi alıyor ayrımı
 }
