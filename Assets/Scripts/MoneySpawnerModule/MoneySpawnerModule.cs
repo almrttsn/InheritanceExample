@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BankrollSpawner : MonoBehaviour
+public class MoneySpawnerModule : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _visualMoneyObjects;
 
