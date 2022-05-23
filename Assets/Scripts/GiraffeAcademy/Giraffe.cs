@@ -7,45 +7,48 @@ public class Giraffe : MonoBehaviour
     [SerializeField] private int num1;
     [SerializeField] private int num2;
     [SerializeField] private string op;
+    [SerializeField] private int _enterANumberFrom1To10;
 
-    private bool _isVeysi = true;
-    private bool _isGoodMan = true;
+    private bool _isDog = true;
+    private bool _isGoodBoy = true;
     float calculationResult;
 
 
 
     private void Start()
     {
-        VeysiOrNot();
+        DogOrCat();
         Debug.Log(GetMax(num1, num2));
         Calculator();
-        Debug.Log(calculationResult);
+        WhileExample();
+        DoWhileExample();
+        GuessWhichNumberITake();
     }
 
-    private void VeysiOrNot()
+    private void DogOrCat()         //if else example for two variables
     {
-        if(_isVeysi && _isGoodMan)
+        if (_isDog && _isGoodBoy)
         {
             Debug.Log("You're perfect blend");
         }
-        else if(_isVeysi && !_isGoodMan)
+        else if (_isDog && !_isGoodBoy)
         {
-            Debug.Log("You're Veysi but is not good man");
+            Debug.Log("Watch your step!");
         }
-        else if(!_isVeysi && _isGoodMan)
+        else if (!_isDog && _isGoodBoy)
         {
-            Debug.Log("You're good man but not a Veysi");
+            Debug.Log("Purring all the time");
         }
         else
         {
-            Debug.Log("Shame on you!");
+            Debug.Log("You little fidget");
         }
     }
 
-    private int GetMax(int num1, int num2)
+    private int GetMax(int num1, int num2)  //find to which number is greater from the other
     {
         int result;
-        if(num1 > num2)
+        if (num1 > num2)
         {
             result = num1;
         }
@@ -56,16 +59,61 @@ public class Giraffe : MonoBehaviour
         return result;
     }
 
-    private void Calculator()
+    private void Calculator()   //making calculations
     {
-        if(op == "+")
+        if (op == "+")
         {
             calculationResult = num1 + num2;
         }
-        else if(op == "-")
+        else if (op == "-")
         {
             calculationResult = num1 - num2;
         }
+        Debug.Log(calculationResult);
     }
-    
+
+    private void WhileExample() //trying to write 1,2,3,4 to console
+    {
+        int index = 1;
+        while (index < 5)
+        {
+            Debug.Log("While example " + index);
+            index++;
+        }
+    }
+
+    private void DoWhileExample()   //trying to write 5,6 to console
+    {
+        int index = 5;
+        do
+        {
+            Debug.Log("DoWhileExapmle " + index);
+            index++;
+        }
+        while (index < 7);
+    }
+
+    private void GuessWhichNumberITake()
+    {
+        int _myNumber = 7;
+        int _guessCount = 0;
+        int _guessCountLimit = 3;
+        int _guessChanceYouHave = _guessCountLimit - _guessCount;
+
+        while (_guessCount < _guessCountLimit)
+        {
+            if (_enterANumberFrom1To10 == _myNumber)
+            {
+                Debug.Log("You Win!");
+            }
+            else
+            {
+                _guessCount++;
+                Debug.Log("Wrong answer, you have left " + _guessChanceYouHave + " guess chance");
+            }
+
+        }
+
+    }
+
 }
